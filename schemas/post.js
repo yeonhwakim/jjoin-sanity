@@ -16,6 +16,11 @@ export default {
       of: [{type: 'reference', to: [{type: 'user'}]}],
     },
     {
+      title: 'Count',
+      name: 'count',
+      type: 'number',
+    },
+    {
       title: 'Photo',
       name: 'photo',
       type: 'image',
