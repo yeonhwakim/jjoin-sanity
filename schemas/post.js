@@ -14,6 +14,7 @@ export default {
       name: 'member',
       type: 'array',
       of: [{type: 'reference', to: [{type: 'user'}]}],
+      validation: (Rule) => Rule.unique(),
     },
     {
       title: 'Count',
@@ -33,6 +34,13 @@ export default {
       validation: (Rule) => Rule.unique(),
     },
     {
+      title: 'Joinpost',
+      name: 'joinpost',
+      type: 'reference',
+      to: [{type: 'post'}],
+      validation: (Rule) => Rule.unique(),
+    },
+    {
       title: 'Coments',
       name: 'coments',
       type: 'array',
@@ -49,4 +57,20 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: 'coments.0.coment',
+      authorName: 'host.name',
+      authorUsername: 'host.username',
+      media: 'photo',
+    },
+    prepare(selection) {
+      const {title, authorName, authorUsername, media} = selection
+      return {
+        title,
+        subtitle: `by ${authorName} (${authorUsername})`,
+        media,
+      }
+    },
+  },
 }
